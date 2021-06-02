@@ -1,0 +1,47 @@
+[package]
+name = "symbol-crypto-core"
+version = "0.1.0"
+authors = ["BlockPuppet Black <blockpuppetblack@gmail.com>"]
+readme = "README.md"
+license = "Apache-2.0"
+repository = "https://github.com/BlockPuppets/symbol-crypto-core-rust"
+keywords = ["symbol", "nis1", "nem", "cryptography", "ed25519", "curve25519", "signature"]
+categories = ["cryptography"]
+exclude = [".gitignore"]
+edition = "2018"
+
+[lib]
+name = "symbol_crypto_core"
+crate-type = ["lib"]
+
+[workspace]
+members = ["core", "crypto-nis1", "crypto-sym"]
+default-members = ["crypto-nis1", "crypto-sym"]
+
+[dependencies]
+core-crypto = { version = "0.1.0", path = "core" }
+nis1-crypto = { version = "0.1.0", path = "crypto-nis1", optional = true }
+sym-crypto = { version = "0.1.0", path = "crypto-sym", optional = true }
+
+[dependencies.serde_crate]
+package = "serde"
+version = "1.0"
+optional = true
+
+[dependencies.serde_bytes]
+version = "0.11"
+optional = true
+
+[dependencies.anyhow]
+version = "1.0"
+
+[features]
+default = ['sym']
+sym = ['sym-crypto'] # default support for symbol blockchain
+nis1 = ['nis1-crypto'] # support for nem nis1 blockchain
+serde = ['serde_crate', 'serde_bytes', 'core-crypto/serde']
+with_mnemonic = ['core-crypto/with_mnemonic']
+
+[dev-dependencies]
+hex = "0.4"
+symbol-crypto-core = { path = ".", features = ['sym', 'nis1', 'with_mnemonic'] }
