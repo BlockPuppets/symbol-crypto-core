@@ -6,6 +6,7 @@ readme = "README.md"
 license = "Apache-2.0"
 repository = "https://github.com/BlockPuppets/symbol-crypto-core"
 keywords = ["symbol", "nis1", "nem", "cryptography", "curve25519"]
+description = "Fast and efficient Rust implementation of Nem Symbol/Nis1 Blockchain crypto."
 categories = ["cryptography"]
 exclude = [".gitignore", ".idea/*", "target/*"]
 edition = "2018"
