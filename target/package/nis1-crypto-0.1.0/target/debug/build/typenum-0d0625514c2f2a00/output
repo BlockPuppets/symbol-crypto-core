@@ -1,0 +1,2 @@
+cargo:rustc-env=TYPENUM_BUILD_CONSTS=/home/privado/Proyects/rust/BlockPuppets/symbol-crypto-core/target/package/nis1-crypto-0.1.0/target/debug/build/typenum-0d0625514c2f2a00/out/consts.rs
+cargo:rustc-env=TYPENUM_BUILD_OP=/home/privado/Proyects/rust/BlockPuppets/symbol-crypto-core/target/package/nis1-crypto-0.1.0/target/debug/build/typenum-0d0625514c2f2a00/out/op.rs

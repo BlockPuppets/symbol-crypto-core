@@ -1,0 +1,1 @@
+{"rustc":18250536222580762119,"features":"[\"alloc\", \"default\", \"std\"]","target":18306414627031202661,"profile":11870183705523825133,"path":7166724146545163761,"deps":[["block-padding v0.2.1","block_padding",9196938606705928934],["cipher v0.3.0","cipher",16850171028302425272]],"local":[{"Precalculated":"0.8.1"}],"rustflags":[],"edition":"Edition2018"}

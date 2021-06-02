@@ -1,0 +1,1 @@
+{"rustc":18250536222580762119,"features":"[\"alloc\", \"zeroize_derive\"]","target":18262004108296089881,"profile":11870183705523825133,"path":7796821492752728806,"deps":[["zeroize_derive v1.1.0","zeroize_derive",8205473419123188645]],"local":[{"Precalculated":"1.3.0"}],"rustflags":[],"edition":"Edition2018"}

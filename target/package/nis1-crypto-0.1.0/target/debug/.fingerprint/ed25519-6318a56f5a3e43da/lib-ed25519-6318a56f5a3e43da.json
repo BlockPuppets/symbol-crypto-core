@@ -1,0 +1,1 @@
+{"rustc":18250536222580762119,"features":"[\"signature\", \"std\"]","target":6671675834031374020,"profile":11870183705523825133,"path":17340781109633868113,"deps":[["signature v1.3.0","signature",7755547711550728488]],"local":[{"Precalculated":"1.1.1"}],"rustflags":[],"edition":"Edition2018"}
