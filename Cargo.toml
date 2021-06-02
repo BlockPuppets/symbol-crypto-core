@@ -7,7 +7,7 @@ license = "Apache-2.0"
 repository = "https://github.com/BlockPuppets/symbol-crypto-core"
 keywords = ["symbol", "nis1", "nem", "cryptography", "ed25519", "curve25519", "signature"]
 categories = ["cryptography"]
-exclude = [".gitignore"]
+exclude = [".gitignore", ".idea/*"]
 edition = "2018"
 
 [lib]
