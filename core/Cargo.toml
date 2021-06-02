@@ -1,10 +1,10 @@
 [package]
 name = "core-crypto"
 version = "0.1.0"
-authors = ["BlockPuppet Black <blockpuppetblack@gmail.com>"]
+authors = ["Puppet Black <blockpuppetblack0@gmail.com>"]
 readme = "README.md"
 license = "Apache-2.0"
-repository = "https://github.com/BlockPuppets/symbol-crypto-core-rust"
+repository = "https://github.com/BlockPuppets/symbol-crypto-core"
 keywords = ["symbol", "nis1", "nem", "cryptography", "ed25519", "curve25519", "signature"]
 categories = ["cryptography"]
 exclude = [".gitignore"]
