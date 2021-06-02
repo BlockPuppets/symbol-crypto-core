@@ -12,14 +12,14 @@ default sym support
 
 ```toml
 [dependencies.symbol-crypto-core]
-version = "0.1"
+version = "0.1.1-alpha.0"
 ```
 
 for nis1 support
 
 ```toml
 [dependencies.symbol-crypto-core]
-version = "0.1"
+version = "0.1.1-alpha.0"
 features = ['nis1']
 ```
 
@@ -27,7 +27,7 @@ for mnemonic support
 
 ```toml
 [dependencies.symbol-crypto-core]
-version = "0.1"
+version = "0.1.1-alpha.0"
 features = ['with_mnemonic']
 ```
 
