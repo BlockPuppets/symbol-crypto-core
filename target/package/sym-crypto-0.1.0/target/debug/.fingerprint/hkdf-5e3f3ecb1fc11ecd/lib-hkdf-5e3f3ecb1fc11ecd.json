@@ -1,1 +1,0 @@
-{"rustc":18250536222580762119,"features":"[]","target":16663492707654324994,"profile":11870183705523825133,"path":12956280906345742696,"deps":[["digest v0.9.0","digest",240503487421747367],["hmac v0.10.1","hmac",614428149153720404]],"local":[{"Precalculated":"0.10.0"}],"rustflags":[],"edition":"Edition2018"}

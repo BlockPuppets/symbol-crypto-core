@@ -1,1 +1,0 @@
-{"rustc":18250536222580762119,"features":"[]","target":7625506748792095746,"profile":11870183705523825133,"path":17179957126607359040,"deps":[["cipher v0.2.5","cipher",2290328462044645213],["opaque-debug v0.3.0","opaque_debug",10337192745369271220]],"local":[{"Precalculated":"0.6.4"}],"rustflags":[],"edition":"Edition2018"}

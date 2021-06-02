@@ -1,1 +1,0 @@
-{"rustc":18250536222580762119,"features":"[]","target":5419312722743664510,"profile":11870183705523825133,"path":2435933835852151488,"deps":[["opaque-debug v0.3.0","opaque_debug",10337192745369271220],["polyval v0.4.5","polyval",6201940179483818593]],"local":[{"Precalculated":"0.3.1"}],"rustflags":[],"edition":"Edition2018"}
