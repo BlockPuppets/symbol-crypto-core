@@ -14,6 +14,7 @@ extern crate serde_crate as serde;
 extern crate sym_crypto as sym;
 
 pub use crate::core::*;
+#[cfg(feature = "nis1")]
 pub use crate::nis1::CryptoNis1;
 pub use crate::sym::CryptoSym;
 
