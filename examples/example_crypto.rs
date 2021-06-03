@@ -1,4 +1,4 @@
-use symbol_crypto_core::{Keypair, KeyPairSchema, Nis1, Sym};
+use symbol_crypto_core::prelude::{KeyPairSchema, Keypair, KpSym, KpNis1};
 
 fn main() {
     let sender_pk = "E1C8521608F4896CA26A0C2DE739310EA4B06861D126CF4D6922064678A1969B";
@@ -7,10 +7,10 @@ fn main() {
     let msg = b"Nem is awesome from Rust!";
 
     println!("Encrypt/Decrypt from Symbol.");
-    encrypt_decrypt::<Sym>(sender_pk, recipient_key, msg);
+    encrypt_decrypt::<KpSym>(sender_pk, recipient_key, msg);
 
     println!("Encrypt/Decrypt from Nis1.");
-    encrypt_decrypt::<Nis1>(sender_pk, recipient_key, msg);
+    encrypt_decrypt::<KpNis1>(sender_pk, recipient_key, msg);
 }
 
 fn encrypt_decrypt<S: KeyPairSchema>(sender_pk: &str, recipient_key: &str, msg: &[u8]) {

@@ -10,13 +10,13 @@
 pub mod tests {
     use hex::ToHex;
 
-    use symbol_crypto_core::{H256, Keypair, PrivateKey, Signature};
+    use symbol_crypto_core::prelude::{H256, Keypair, PrivateKey, Signature};
 
     const KEYPAIR_BYTES_SIZE: usize = 64;
     const SIGNATURE_SIZE: usize = 64;
 
     pub mod tests_sym {
-        use symbol_crypto_core::Sym;
+        use symbol_crypto_core::prelude::KpSym;
 
         use super::*;
 
@@ -50,8 +50,8 @@ pub mod tests {
                 for (i, private_key_hex) in PRIVATE_KEYS.iter().enumerate() {
                     let expected_public_key_hex: &str = PUBLIC_KEYS[i];
 
-                    let keypair: Keypair<Sym> =
-                        Keypair::<Sym>::from_hex_private_key(private_key_hex).unwrap();
+                    let keypair: Keypair<KpSym> =
+                        Keypair::<KpSym>::from_hex_private_key(private_key_hex).unwrap();
 
                     assert_eq!(
                         private_key_hex.to_string(),
@@ -67,7 +67,7 @@ pub mod tests {
             #[test]
             fn test_invalid_private_key() {
                 INVALID_PRIVATE_KEYS.iter().for_each(move |private_key| {
-                    let keypair = Keypair::<Sym>::from_hex_private_key(private_key);
+                    let keypair = Keypair::<KpSym>::from_hex_private_key(private_key);
                     assert!(keypair.is_err());
                 });
             }
@@ -76,7 +76,7 @@ pub mod tests {
             #[should_panic(expected = "private_key it's not hex.")]
             fn test_invalid_private_key_panic() {
                 INVALID_PRIVATE_KEYS.iter().for_each(|private_key| {
-                    Keypair::<Sym>::from_hex_private_key(private_key).unwrap();
+                    Keypair::<KpSym>::from_hex_private_key(private_key).unwrap();
                 });
             }
 
@@ -89,7 +89,7 @@ pub mod tests {
                     139, 119, 145, 170, 154, 209, 82, 238, 124, 253, 65,
                 ]);
 
-                let keypair: Keypair<Sym> = Keypair::<Sym>::from_bytes(&keypair_bytes).unwrap();
+                let keypair: Keypair<KpSym> = Keypair::<KpSym>::from_bytes(&keypair_bytes).unwrap();
 
                 assert_eq!(keypair.to_bytes().len(), KEYPAIR_BYTES_SIZE);
                 assert_eq!(keypair_bytes, keypair.to_bytes().to_vec());
@@ -126,7 +126,7 @@ pub mod tests {
             #[test]
             fn test_sign() {
                 let payload = H256::random();
-                let keypair: Keypair<Sym> = Keypair::<Sym>::random();
+                let keypair: Keypair<KpSym> = Keypair::<KpSym>::random();
                 // Act:
                 let signature = keypair.sign(&payload.as_bytes());
 
@@ -136,8 +136,8 @@ pub mod tests {
             #[test]
             fn test_sign_verify_vector() {
                 for (i, private_key_hex) in SYMBOL_PRIVATE_KEY.iter().enumerate() {
-                    let keypair: Keypair<Sym> =
-                        Keypair::<Sym>::from_hex_private_key(private_key_hex).unwrap();
+                    let keypair: Keypair<KpSym> =
+                        Keypair::<KpSym>::from_hex_private_key(private_key_hex).unwrap();
 
                     let payload = hex::decode(SYMBOL_DATA[i]).unwrap();
 
@@ -152,8 +152,8 @@ pub mod tests {
             #[test]
             fn test_sing_same_signature_same_key_pairs() {
                 let private_key = PrivateKey::random().encode_hex::<String>();
-                let key_pair1 = Keypair::<Sym>::from_hex_private_key(&private_key).unwrap();
-                let key_pair2 = Keypair::<Sym>::from_hex_private_key(&private_key).unwrap();
+                let key_pair1 = Keypair::<KpSym>::from_hex_private_key(&private_key).unwrap();
+                let key_pair2 = Keypair::<KpSym>::from_hex_private_key(&private_key).unwrap();
 
                 let payload = H256::random();
 
@@ -165,8 +165,8 @@ pub mod tests {
 
             #[test]
             fn test_sign_different_signature_different_key_pairs() {
-                let key_pair1 = Keypair::<Sym>::random();
-                let key_pair2 = Keypair::<Sym>::random();
+                let key_pair1 = Keypair::<KpSym>::random();
+                let key_pair2 = Keypair::<KpSym>::random();
 
                 let payload = H256::random();
 
@@ -182,7 +182,7 @@ pub mod tests {
 
             #[test]
             fn test_verify_data_signed_same_key_pairs() {
-                let key_pair = Keypair::<Sym>::random();
+                let key_pair = Keypair::<KpSym>::random();
                 let payload = H256::random();
 
                 let signature = key_pair.sign(payload.as_bytes());
@@ -194,8 +194,8 @@ pub mod tests {
 
             #[test]
             fn test_verify_data_signed_different_key_pairs() {
-                let key_pair1 = Keypair::<Sym>::random();
-                let key_pair2 = Keypair::<Sym>::random();
+                let key_pair1 = Keypair::<KpSym>::random();
+                let key_pair2 = Keypair::<KpSym>::random();
 
                 let payload = H256::random();
 
@@ -208,7 +208,7 @@ pub mod tests {
 
             #[test]
             fn test_verify_signature_has_been_modified() {
-                let key_pair = Keypair::<Sym>::random();
+                let key_pair = Keypair::<KpSym>::random();
 
                 let payload = H256::random();
 
@@ -225,7 +225,7 @@ pub mod tests {
 
             #[test]
             fn test_verify_payload_has_been_modified() {
-                let key_pair = Keypair::<Sym>::random();
+                let key_pair = Keypair::<KpSym>::random();
 
                 let mut payload = H256::random();
 
@@ -242,7 +242,7 @@ pub mod tests {
 
             #[test]
             fn test_verify_zero_public_key() {
-                let mut key_pair = Keypair::<Sym>::random();
+                let mut key_pair = Keypair::<KpSym>::random();
                 key_pair.0.public_key.0.fill(0);
 
                 let payload = H256::random();
@@ -255,7 +255,7 @@ pub mod tests {
 
             #[test]
             fn test_verify_public_key_does_not_correspond_to_private_key() {
-                let mut key_pair = Keypair::<Sym>::random();
+                let mut key_pair = Keypair::<KpSym>::random();
 
                 let payload = H256::random();
 
@@ -276,7 +276,7 @@ pub mod tests {
     }
 
     pub mod tests_nis1 {
-        use symbol_crypto_core::Nis1;
+        use symbol_crypto_core::prelude::KpNis1;
 
         use super::*;
 
@@ -291,7 +291,7 @@ pub mod tests {
                     "ed9bf729c0d93f238bc4af468b952c35071d9fe1219b27c30dfe108c2e3db030";
 
                 // Act:
-                let kp = Keypair::<Nis1>::from_hex_private_key(private_key).unwrap();
+                let kp = Keypair::<KpNis1>::from_hex_private_key(private_key).unwrap();
 
                 assert_eq!(kp.public_key().encode_hex::<String>(), expected_public_key);
             }
@@ -307,7 +307,7 @@ pub mod tests {
                 let expected_signature = "d9cec0cc0e3465fab229f8e1d6db68ab9cc99a18cb0435f70deb6100948576cd5c0aa1feb550bdd8693ef81eb10a556a622db1f9301986827b96716a7134230c";
 
                 // Act:
-                let kp = Keypair::<Nis1>::from_hex_private_key(private_key).unwrap();
+                let kp = Keypair::<KpNis1>::from_hex_private_key(private_key).unwrap();
 
                 let data = hex::decode("8ce03cd60514233b86789729102ea09e867fc6d964dea8c2018ef7d0a2e0e24bf7e348e917116690b9").unwrap();
 
@@ -332,7 +332,7 @@ pub mod tests {
                     Signature::from_str
                         ("d940d229dc57c7fca77e3232e09914e41de5c5d175de3ef58be3b35692514ea2337ef514a059e742a15ee5d02a09fd0d3803e9379d9e008be128a49dd554b600").unwrap();
                 // Act:
-                let kp = Keypair::<Nis1>::from_hex_private_key(signer).unwrap();
+                let kp = Keypair::<KpNis1>::from_hex_private_key(signer).unwrap();
 
                 let signature = kp.verify(data, signature);
 
@@ -366,7 +366,7 @@ pub mod tests {
                     Signature::from_str
                         ("d940d229dc57c7fca77e3232e09914e41de5c5d175de3ef58be3b35692514ea2337ef514a059e742a15ee5d02a09fd0d3803e9379d9e008be128a49dd554b600").unwrap();
                 // Act:
-                let kp = Keypair::<Nis1>::from_hex_private_key(signer).unwrap();
+                let kp = Keypair::<KpNis1>::from_hex_private_key(signer).unwrap();
 
                 let signature = kp.verify(data, signature);
 
@@ -382,7 +382,7 @@ pub mod tests {
                     Signature::from_str
                         ("d940d229dc57c7fca77e3232e09914e41de5c5d175de3ef58be3b35692514ea2337ef514a059e742a15ee5d02a09fd0d3803e9379d9e008be128a49dd554b600").unwrap();
                 // Act:
-                let kp = Keypair::<Nis1>::from_hex_private_key(signer).unwrap();
+                let kp = Keypair::<KpNis1>::from_hex_private_key(signer).unwrap();
 
                 let signature = kp.verify(data, signature);
 
@@ -398,7 +398,7 @@ pub mod tests {
                     Signature::from_str
                         ("f67e5abbf48a53e3c7c9c402bcb1b0a855821d5ef970dd5357b9899034d0c8dc177cef8e5924607ca325041b57db33628bd2f010c2474ff18fff7b509a1eeacb").unwrap();
                 // Act:
-                let kp = Keypair::<Nis1>::from_hex_private_key(signer).unwrap();
+                let kp = Keypair::<KpNis1>::from_hex_private_key(signer).unwrap();
 
                 let signature = kp.verify(data, signature);
 

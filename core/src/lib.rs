@@ -23,6 +23,7 @@ pub use self::private_key::*;
 pub use self::public_key::*;
 pub use self::signature::*;
 pub use self::utils::*;
+pub use self::keypair::*;
 
 mod block_cipher;
 mod constants;
@@ -34,3 +35,4 @@ mod private_key;
 mod public_key;
 mod signature;
 mod utils;
+mod keypair;

@@ -1,8 +1,8 @@
 [package]
 name = "core-crypto"
-version = "0.1.1-alpha.0"
+version = "0.1.1-alpha.1"
 authors = ["Puppet Black <blockpuppetblack0@gmail.com>"]
-description = "Symbol/Nis1 Crypto Core crate."
+description = "Symbol & Nis1 Crypto Core crate."
 readme = "README.md"
 license = "Apache-2.0"
 repository = "https://github.com/BlockPuppets/symbol-crypto-core"
@@ -54,7 +54,7 @@ version = "0.7"
 default-features = false
 
 [features]
-default = []  # default support for symbol blockchain
+default = []
 serde = ['serde_crate', 'serde_bytes']
 with_mnemonic = ['bip39']
 

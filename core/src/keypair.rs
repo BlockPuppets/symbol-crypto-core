@@ -27,15 +27,7 @@ use serde::{Deserialize, Deserializer, Serialize, Serializer};
 use serde::de::Error as SerdeError;
 #[cfg(feature = "serde")]
 use serde_bytes::{ByteBuf as SerdeByteBuf, Bytes as SerdeBytes};
-
-use core::{
-    BlockCipher, KEY_BYTES_SIZE, KEYPAIR_LENGTH, KeyPairSchema, PrivateKey, PublicKey, Signature,
-};
-
-#[cfg(feature = "nis1")]
-pub type Nis1 = nis1_crypto::keypair::Keypair;
-
-pub type Sym = sym_crypto::keypair::Keypair;
+use crate::{KeyPairSchema, PrivateKey, KEYPAIR_LENGTH, KEY_BYTES_SIZE, Signature, PublicKey, BlockCipher};
 
 /// It represents an asymmetric private/public encryption key.
 ///
@@ -48,7 +40,7 @@ impl<Kp: KeyPairSchema> Keypair<Kp> {
     /// # Example
     ///
     /// ```
-    /// use  symbol_crypto_core::{Keypair, Sym};
+    /// use symbol_crypto_core::prelude::{Keypair, Sym};
     /// #
     /// # fn main() {
     /// #
@@ -84,7 +76,7 @@ impl<Kp: KeyPairSchema> Keypair<Kp> {
     /// # Example
     ///
     /// ```
-    /// use symbol_crypto_core::{Keypair, Sym};
+    /// use symbol_crypto_core::prelude::{Keypair, Sym};
     /// #
     /// # fn main() {
     /// #
@@ -114,7 +106,7 @@ impl<Kp: KeyPairSchema> Keypair<Kp> {
     ///
     /// ```
     /// # use std::str::FromStr;
-    /// use symbol_crypto_core::{Keypair, PrivateKey, Sym};
+    /// use symbol_crypto_core::prelude::{Keypair, PrivateKey, Sym};
     /// #
     /// # fn main() {
     /// #
@@ -156,7 +148,7 @@ impl<Kp: KeyPairSchema> Keypair<Kp> {
     /// # Example
     ///
     /// ```
-    /// use symbol_crypto_core::{Keypair, Sym};
+    /// use symbol_crypto_core::prelude::{Keypair, Sym};
     /// #
     /// # fn main() {
     /// #
@@ -211,7 +203,7 @@ impl<Kp: KeyPairSchema> Keypair<Kp> {
     ///
     /// ```
     /// # use std::str::FromStr;
-    /// use symbol_crypto_core::{Keypair, Sym, PublicKey};
+    /// use symbol_crypto_core::prelude::{Keypair, Sym, PublicKey};
     ///
     /// # fn main() {
     /// #
@@ -250,7 +242,7 @@ impl<Kp: KeyPairSchema> Keypair<Kp> {
     ///
     /// ```
     /// # use std::str::FromStr;
-    /// use symbol_crypto_core::{Keypair, Sym, PublicKey};
+    /// use symbol_crypto_core::prelude::{Keypair, Sym, PublicKey};
     ///
     /// # fn main() {
     /// #

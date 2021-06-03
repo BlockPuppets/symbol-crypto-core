@@ -1,12 +1,12 @@
 [package]
 name = "sym-crypto"
-version = "0.1.1-alpha.0"
+version = "0.1.1-alpha.1"
 authors = ["Puppet Black <blockpuppetblack0@gmail.com>"]
-description = "Symbol Bockchain crypto crate"
+description = "Symbol Bockchain crypto crate."
 readme = "README.md"
 license = "Apache-2.0"
 repository = "https://github.com/BlockPuppets/symbol-crypto-core"
-keywords = ["symbol", "nis1", "nem", "cryptography", "curve25519"]
+keywords = ["symbol", "nem", "cryptography", "curve25519"]
 categories = ["cryptography"]
 exclude = [".gitignore"]
 edition = "2018"
@@ -15,8 +15,9 @@ edition = "2018"
 name = "sym_crypto"
 crate-type = ["lib"]
 
-[dependencies]
-core-crypto = { version = "0.1.1-alpha.0", path = "../core" }
+[dependencies.core-crypto]
+version = "0.1.1-alpha.1"
+path = "../core"
 
 [dependencies.serde_crate]
 package = "serde"
@@ -44,7 +45,7 @@ version = "0.9"
 version = "1.0"
 
 [features]
-default = []  # default support for symbol blockchain
+default = []
 serde = ['serde_crate', 'serde_bytes']
 
 [dev-dependencies]
