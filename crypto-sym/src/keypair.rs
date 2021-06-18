@@ -19,9 +19,11 @@ use ::std::fmt;
 use anyhow::{ensure, Result};
 use rand::thread_rng;
 #[cfg(feature = "serde")]
-use serde::{Serialize, Serializer};
+use serde::{Deserialize, Deserializer, Serialize, Serializer};
 #[cfg(feature = "serde")]
-use serde_bytes::Bytes as SerdeBytes;
+use serde_bytes::{ByteBuf as SerdeByteBuf, Bytes as SerdeBytes};
+#[cfg(feature = "serde")]
+use serde::de::Error as SerdeError;
 
 use core::ed25519::{self, Verifier};
 
@@ -188,5 +190,16 @@ impl Serialize for Keypair {
     {
         let bytes = &self.to_bytes()[..];
         SerdeBytes::new(bytes).serialize(serializer)
+    }
+}
+
+#[cfg(feature = "serde")]
+impl<'d> Deserialize<'d> for Keypair {
+    fn deserialize<D>(deserializer: D) -> std::result::Result<Self, D::Error>
+        where
+            D: Deserializer<'d>,
+    {
+        let bytes = <SerdeByteBuf>::deserialize(deserializer)?;
+        Keypair::from_bytes(bytes.as_ref()).map_err(SerdeError::custom)
     }
 }

@@ -7,8 +7,6 @@
 // except according to those terms.
 
 #[cfg(feature = "serde")]
-use hex::ToHex;
-#[cfg(feature = "serde")]
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 #[cfg(feature = "serde")]
 use serde_bytes::{ByteBuf as SerdeByteBuf, Bytes as SerdeBytes};
