@@ -1,6 +1,6 @@
 [package]
 name = "symbol-crypto-core"
-version = "0.1.1-alpha.1"
+version = "0.1.1-alpha.2"
 authors = ["Puppet Black <blockpuppetblack0@gmail.com>"]
 readme = "README.md"
 license = "Apache-2.0"
@@ -20,15 +20,15 @@ members = ["core", "crypto-nis1", "crypto-sym"]
 default-members = ["crypto-nis1", "crypto-sym"]
 
 [dependencies]
-core-crypto = { version = "0.1.1-alpha.1", path = "core" }
-nis1-crypto = { version = "0.1.1-alpha.1", path = "crypto-nis1", optional = true }
-sym-crypto = { version = "0.1.1-alpha.1", path = "crypto-sym", optional = true }
+core-crypto = { version = "0.1.1-alpha.2", path = "core" }
+nis1-crypto = { version = "0.1.1-alpha.2", path = "crypto-nis1", optional = true }
+sym-crypto = { version = "0.1.1-alpha.2", path = "crypto-sym", optional = true }
 
 [features]
 default = ['sym']
 sym = ['sym-crypto'] # default support for symbol blockchain
 nis1 = ['nis1-crypto'] # support for nem nis1 blockchain
-serde = ['core-crypto/serde']
+serde = ['core-crypto/serde', 'sym-crypto/serde', 'nis1-crypto/serde']
 with_mnemonic = ['core-crypto/with_mnemonic']
 full = ['sym', 'nis1', 'serde', 'with_mnemonic']
 

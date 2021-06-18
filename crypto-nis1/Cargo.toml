@@ -1,6 +1,6 @@
 [package]
 name = "nis1-crypto"
-version = "0.1.1-alpha.1"
+version = "0.1.1-alpha.2"
 authors = ["Puppet Black <blockpuppetblack0@gmail.com>"]
 description = "Nem Nis1 Bockchain crypto crate."
 readme = "README.md"
@@ -16,7 +16,7 @@ name = "nis1_crypto"
 crate-type = ["lib"]
 
 [dependencies.core-crypto]
-version = "0.1.1-alpha.1"
+version = "0.1.1-alpha.2"
 path = "../core"
 
 [dependencies.serde_crate]

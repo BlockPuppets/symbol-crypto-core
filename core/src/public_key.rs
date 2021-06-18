@@ -11,7 +11,7 @@ use hex::ToHex;
 #[cfg(feature = "serde")]
 use serde::{Deserialize, Deserializer, Serialize, Serializer};
 #[cfg(feature = "serde")]
-use serde_bytes::ByteBuf as SerdeByteBuf;
+use serde_bytes::{ByteBuf as SerdeByteBuf, Bytes as SerdeBytes};
 
 use super::KEY_BYTES_SIZE;
 
@@ -26,7 +26,8 @@ impl Serialize for PublicKey {
     where
         S: Serializer,
     {
-        serializer.serialize_str(&self.encode_hex_upper::<String>())
+        let bytes = self.as_bytes();
+        SerdeBytes::new(bytes).serialize(serializer)
     }
 }
 
