@@ -1,6 +1,6 @@
 [package]
 name = "sym-crypto"
-version = "0.1.1-alpha.2"
+version = "0.1.1-alpha.3"
 authors = ["Puppet Black <blockpuppetblack0@gmail.com>"]
 description = "Symbol Bockchain crypto crate."
 readme = "README.md"
@@ -19,6 +19,9 @@ crate-type = ["lib"]
 version = "0.1.1-alpha.2"
 path = "../core"
 
+[dependencies.anyhow]
+version = "1.0"
+
 [dependencies.serde_crate]
 package = "serde"
 version = "1.0"
@@ -30,22 +33,16 @@ optional = true
 
 [dependencies.rand]
 version = "0.7"
-default-features = false
 
 [dependencies.aes-gcm]
-version = "0.8.0"
+version = "0.10.0-pre"
 
 [dependencies.hkdf]
-version = "0.10.0"
+version = "0.12"
 
 [dependencies.sha2]
-version = "0.9"
-
-[dependencies.anyhow]
-version = "1.0"
+version = "0.10"
 
 [features]
 default = []
 serde = ['serde_crate', 'serde_bytes']
-
-[dev-dependencies]

@@ -6,18 +6,18 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use aes::Aes256;
-use anyhow::{ensure, Result};
-use block_modes::{block_padding::Pkcs7, BlockMode, Cbc};
+use aes::cipher::{block_padding::Pkcs7, BlockDecryptMut, BlockEncryptMut, KeyIvInit};
+use anyhow::{anyhow, ensure, Result};
 use sha3::Keccak512;
 
+use super::keccak_256::keccak256;
 use crate::core::{
     derive_shared_secret, random_bytes, BlockCipher, PrivateKey, PublicKey, H256, KEY_BYTES_SIZE,
     NIS_AES_IV_LENGTH, NIS_SALT_LENGTH,
 };
-use super::keccak_256::keccak256;
 
-type Aes256Cbc = Cbc<Aes256, Pkcs7>;
+type Aes256CbcEnc = cbc::Encryptor<aes::Aes256>;
+type Aes2568CbcDec = cbc::Decryptor<aes::Aes256>;
 
 pub struct CryptoNis1;
 
@@ -146,8 +146,8 @@ fn derive_shared_key(
 /// value
 /// is an `Error` describing the error that occurred.
 fn encrypt(iv: [u8; NIS_AES_IV_LENGTH], derive_key: H256, msg: &[u8]) -> Result<Vec<u8>> {
-    let cipher = Aes256Cbc::new_from_slices(derive_key.as_bytes(), &iv)?;
-    let encrypt = cipher.encrypt_vec(&msg);
+    let cipher = Aes256CbcEnc::new_from_slices(derive_key.as_bytes(), &iv)?;
+    let encrypt = cipher.encrypt_padded_vec_mut::<Pkcs7>(&msg);
 
     Ok(encrypt)
 }
@@ -159,8 +159,10 @@ fn encrypt(iv: [u8; NIS_AES_IV_LENGTH], derive_key: H256, msg: &[u8]) -> Result<
 /// A `Result` whose okay value is a plaintext as a vector of bytes or whose error value
 /// is an `Error` describing the error that occurred.
 fn decrypt(iv: [u8; NIS_AES_IV_LENGTH], derive_key: H256, enc_msg: &[u8]) -> Result<Vec<u8>> {
-    let cipher = Aes256Cbc::new_from_slices(&derive_key.as_bytes(), &iv)?;
-    let decrypted = cipher.decrypt_vec(&enc_msg)?;
+    let cipher = Aes2568CbcDec::new_from_slices(&derive_key.as_bytes(), &iv)?;
+    let decrypted = cipher
+        .decrypt_padded_vec_mut::<Pkcs7>(&enc_msg)
+        .map_err(|e| anyhow!("{}", e))?;
 
     Ok(decrypted)
 }
